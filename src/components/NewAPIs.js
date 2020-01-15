@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { /* useState, */ useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Example = props => {
@@ -11,7 +11,9 @@ const Example = props => {
   });
   return (
     <div>
-      <p>{JSON.stringify(props)}</p>
+      <p>
+        Props: {JSON.stringify(props)}, Store Name: {state.name}
+      </p>
       <p>Count: {state.count}</p>
       <button
         onClick={() =>

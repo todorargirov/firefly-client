@@ -8,14 +8,4 @@ export const globalStore = {
   }
 };
 
-export const globalReducer = (
-  state = {},
-  action = { type: '', payload: {} }
-) => {
-  switch (action.type) {
-    case 'changeState':
-      return applyChangeStateReducer(state, action.payload);
-    default:
-      return state;
-  }
-};
+export const globalReducer = applyChangeStateReducer;
