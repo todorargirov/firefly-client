@@ -1,3 +1,6 @@
+## Firefly Client
+Front-end based on React, Redux, React-redux (component library to follow)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
