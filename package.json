@@ -12,6 +12,16 @@
         "react-scripts": "3.3.0",
         "redux": "^4.0.5"
     },
+    "devDependencies": {
+        "husky": "^3.1.0",
+        "prettier": "1.19.1",
+        "pretty-quick": "^2.0.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick staged"
+        }
+    },
     "homepage": ".",
     "scripts": {
         "start": "react-scripts start",
