@@ -1,23 +1,14 @@
 import React from 'react';
-import { Container, ThemeProvider, CssBaseline } from '@material-ui/core';
-import { ThreeDRotation } from '@material-ui/icons';
-import useGlobalStyles from './globalStyles';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import theme from './theme';
-import GlobalRoutes from './globalRoutes';
+import GlobalRouter from './globalRoutes';
 
-function App() {
-    const classes = useGlobalStyles();
+export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             {/* Top level Router for the app goes here */}
-            <GlobalRoutes />
-            <Container component="div" className={classes.main}>
-                <ThreeDRotation />
-                Create React App v4-beta example
-            </Container>
+            <GlobalRouter />
         </ThemeProvider>
     );
 }
-
-export default App;

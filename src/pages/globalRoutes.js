@@ -1,21 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-export default function GlobalRoutes() {
-    return (
-        <BrowserRouter>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
+const isAuthenticated = true;
 
+const renderAuthRedirect = () => {
+    if (!isAuthenticated) {
+        return (
             <Switch>
-                <Route path="/login">
-                    <p>Login</p>
+                <Redirect to="/login" />
+            </Switch>
+        );
+    } else {
+        return (
+            <Switch>
+                <Route exact path="/">
+                    Home
                 </Route>
-                <Route path="/">
-                    {/* Check auth before rendering this and any below routes */}
-                    <p>Home</p>
+                <Route exact path="/about">
+                    About
                 </Route>
             </Switch>
-        </BrowserRouter>
-    );
+        );
+    }
+};
+export default function GlobalRouter() {
+    return <BrowserRouter>{renderAuthRedirect()}</BrowserRouter>;
 }
