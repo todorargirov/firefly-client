@@ -1,18 +1,8 @@
 import React from 'react';
-import { Container, createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { Container, ThemeProvider, CssBaseline } from '@material-ui/core';
 import { ThreeDRotation } from '@material-ui/icons';
 import useGlobalStyles from './globalStyles';
-
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: '"Helvetica", "Arial", sans-serif',
-    },
-    palette: {
-        background: {
-            default: '#121212',
-        },
-    },
-});
+import theme from './theme';
 
 function App() {
     const classes = useGlobalStyles();
