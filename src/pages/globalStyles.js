@@ -5,10 +5,10 @@ const useGlobalStyles = makeStyles({
         background: '#282c34',
         color: 'white',
         padding: '20px',
-        border: '1px solid green',
+        border: '1px solid gray',
         borderRadius: 3,
         height: '100%',
-        maxWidth: '100%',
+        maxWidth: '90%',
     },
 });
 

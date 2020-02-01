@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-
+import Home from './Home';
+// use an auth service here to check local storage for key and authorization header etc
 const isAuthenticated = true;
 
 const renderAuthRedirect = () => {
@@ -14,7 +15,7 @@ const renderAuthRedirect = () => {
         return (
             <Switch>
                 <Route exact path="/">
-                    Home
+                    <Home />
                 </Route>
                 <Route exact path="/about">
                     About

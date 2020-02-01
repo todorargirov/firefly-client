@@ -1,16 +1,23 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { ThreeDRotation } from '@material-ui/icons';
-import useGlobalStyles from '../globalStyles';
+import { makeStyles } from '@material-ui/core/styles';
+import TopBar from '../../components/TopBar';
+import SideMenu from '../../components/SideMenu';
+import MainFrame from '../../components/MainFrame';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+    },
+}));
 
 export default function Home() {
-    const classes = useGlobalStyles();
+    const classes = useStyles();
+
     return (
-        <Container component="div" className={classes.main}>
-            <ThreeDRotation />
-            Create React App v4-beta example
-            <Link to="/login">Login</Link>
-        </Container>
+        <div className={classes.root}>
+            <TopBar className={classes.appBar} />
+            <SideMenu className={classes.drawer} classes={{ drawerPaper: classes.drawerPaper }} />
+            <MainFrame />
+        </div>
     );
 }
