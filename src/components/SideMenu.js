@@ -1,6 +1,7 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
-
+import { Drawer, List, makeStyles } from '@material-ui/core';
+import routerConfig from '../config/routerConfig';
+import { ExpandableMenuItem, SimpleMenuItem } from '../components/MenuItem';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -26,11 +27,14 @@ export default function SideMenu(props) {
         >
             <div className={classes.toolbar} />
             <List>
-                {['Home', 'Login', 'About'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                {routerConfig.map(menuItem => {
+                    if (menuItem.submenu && menuItem.submenu.length > 0) {
+                        return (
+                            <ExpandableMenuItem key={menuItem.text} text={menuItem.text} submenu={menuItem.submenu} />
+                        );
+                    }
+                    return <SimpleMenuItem key={menuItem.text} text={menuItem.text} path={menuItem.path} />;
+                })}
             </List>
         </Drawer>
     );

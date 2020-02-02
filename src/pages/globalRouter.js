@@ -25,5 +25,5 @@ const renderAuthRedirect = () => {
     }
 };
 export default function GlobalRouter() {
-    return <BrowserRouter>{renderAuthRedirect()}</BrowserRouter>;
+    return <BrowserRouter>{renderAuthRedirect()} {...children}</BrowserRouter>;
 }
