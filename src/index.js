@@ -4,14 +4,12 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { globalStore, globalReducer } from './store/global';
 
-import App from './pages/App';
-
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(globalReducer, globalStore);
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <h1>App</h1>
     </Provider>,
     document.getElementById('root')
 );
