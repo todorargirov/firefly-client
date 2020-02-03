@@ -38,7 +38,7 @@ function ListItemLink(props) {
 
 function NestedMenu(props) {
     const classes = useStyles();
-    const { path, text, icon, subRoutes } = props;
+    const { text, icon, subRoutes } = props;
     const [open, setOpen] = useState(false);
     const handleClick = () => setOpen(!open);
 
