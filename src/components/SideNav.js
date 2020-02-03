@@ -71,7 +71,7 @@ const renderMenu = routes => {
                 if (Array.isArray(subRoutes)) {
                     return <NestedMenu key={path} text={text} icon={icon} subRoutes={subRoutes} />;
                 } else {
-                    return <ListItemLink key={path} to={path} primary={text} icon={icon} subRoutes={subRoutes} />;
+                    return <ListItemLink key={path} to={path} primary={text} icon={icon} />;
                 }
             })}
         </List>
