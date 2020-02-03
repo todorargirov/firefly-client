@@ -1,7 +1,14 @@
 import React from 'react';
 import { MoveToInbox as InboxIcon } from '@material-ui/icons';
+import Demo from '../views/Demo';
 
 export const routes = [
+    {
+        path: '/index',
+        text: 'Index',
+        icon: <InboxIcon />,
+        component: <span>Index</span>,
+    },
     {
         text: 'Home',
         icon: <InboxIcon />,
@@ -10,13 +17,13 @@ export const routes = [
                 path: '/',
                 text: 'Home',
                 icon: <InboxIcon />,
-                component: <span>Home</span>,
+                component: <Demo />,
             },
             {
                 path: '/sub',
                 text: 'Sub Home',
                 icon: <InboxIcon />,
-                component: <span>Sub Home</span>,
+                component: <span>Sub</span>,
             },
         ],
     },
@@ -34,7 +41,7 @@ export const routes = [
                 path: '/sub2',
                 text: 'Sub Home',
                 icon: <InboxIcon />,
-                component: <span>Sub Content 2</span>,
+                component: <span>Sub Home</span>,
             },
         ],
     },
