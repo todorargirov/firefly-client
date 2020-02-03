@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles, Collapse } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { useSelector, useDispatch } from 'react-redux';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -27,29 +28,39 @@ function ListItemLink(props) {
     );
 
     return (
-        <li>
+        <>
             <ListItem button component={renderLink} className={className}>
                 {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
                 <ListItemText primary={primary} />
             </ListItem>
-        </li>
+        </>
     );
 }
 
 function NestedMenu(props) {
     const classes = useStyles();
     const { text, icon, subRoutes } = props;
-    const [open, setOpen] = useState(false);
-    const handleClick = () => setOpen(!open);
+    const expandMenuKey = useSelector(state => state.expandMenuKey);
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch({
+            type: 'expandMenu',
+            payload: {
+                expandMenuKey: expandMenuKey === text ? null : text,
+            },
+        });
+    };
+
+    const isOpen = expandMenuKey === text;
 
     return (
-        <li>
-            <ListItem button onClick={handleClick}>
+        <>
+            <ListItem key={text} button onClick={handleClick}>
                 {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
                 <ListItemText primary={text} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {isOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List>
                     {subRoutes.map(subRoute => {
                         const { path, text, icon } = subRoute;
@@ -59,7 +70,7 @@ function NestedMenu(props) {
                     })}
                 </List>
             </Collapse>
-        </li>
+        </>
     );
 }
 
@@ -69,7 +80,7 @@ const renderMenu = routes => {
             {routes.map(route => {
                 const { path, text, icon, subRoutes } = route;
                 if (Array.isArray(subRoutes)) {
-                    return <NestedMenu key={path} text={text} icon={icon} subRoutes={subRoutes} />;
+                    return <NestedMenu key={text} text={text} icon={icon} subRoutes={subRoutes} />;
                 } else {
                     return <ListItemLink key={path} to={path} primary={text} icon={icon} />;
                 }

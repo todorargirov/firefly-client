@@ -3,10 +3,8 @@ import { MoveToInbox as InboxIcon } from '@material-ui/icons';
 
 export const routes = [
     {
-        path: 'Category-Home',
         text: 'Home',
         icon: <InboxIcon />,
-        component: <span>Content</span>,
         subRoutes: [
             {
                 path: '/',
@@ -23,10 +21,8 @@ export const routes = [
         ],
     },
     {
-        path: 'Category-Login',
         text: 'Login',
         icon: <InboxIcon />,
-        component: <span>Login</span>,
         subRoutes: [
             {
                 path: '/login',
