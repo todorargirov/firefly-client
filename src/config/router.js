@@ -1,6 +1,7 @@
 import React from 'react';
 import { MoveToInbox as InboxIcon } from '@material-ui/icons';
 import Demo from '../views/Demo';
+import CatalogMockup from '../views/CatalogMockup';
 
 export const routes = [
     {
@@ -8,6 +9,12 @@ export const routes = [
         text: 'Index',
         icon: <InboxIcon />,
         component: <span>Index</span>,
+    },
+    {
+        path: '/catalogmockup',
+        text: 'Catalog Mockup',
+        icon: <InboxIcon />,
+        component: <CatalogMockup />,
     },
     {
         text: 'Home',

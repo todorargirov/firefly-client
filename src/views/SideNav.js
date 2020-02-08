@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ListItemLink(props) {
-    const { icon, primary, to, className } = props;
+    const { icon, primary, to, className, onClick } = props;
 
     const renderLink = React.useMemo(
         () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
@@ -29,7 +29,7 @@ function ListItemLink(props) {
 
     return (
         <>
-            <ListItem button component={renderLink} className={className}>
+            <ListItem button component={renderLink} className={className} onClick={onClick}>
                 {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
                 <ListItemText primary={primary} />
             </ListItem>
@@ -74,7 +74,17 @@ function NestedMenu(props) {
     );
 }
 
-const renderMenu = routes => {
+function RenderMenu(routes) {
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch({
+            type: 'expandMenu',
+            payload: {
+                expandMenuKey: null,
+            },
+        });
+    };
+
     return (
         <List>
             {routes.map(route => {
@@ -82,12 +92,12 @@ const renderMenu = routes => {
                 if (Array.isArray(subRoutes)) {
                     return <NestedMenu key={text} text={text} icon={icon} subRoutes={subRoutes} />;
                 } else {
-                    return <ListItemLink key={path} to={path} primary={text} icon={icon} />;
+                    return <ListItemLink key={path} to={path} primary={text} icon={icon} onClick={handleClick} />;
                 }
             })}
         </List>
     );
-};
+}
 
 export default function SideNav(props) {
     const classes = useStyles();
@@ -96,7 +106,7 @@ export default function SideNav(props) {
     return (
         <Drawer className={classes.drawer} variant="permanent" classes={{ paper: classes.drawerPaper }}>
             <div className={classes.heightAdjust} />
-            {renderMenu(routes)}
+            {RenderMenu(routes)}
         </Drawer>
     );
 }
