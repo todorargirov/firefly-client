@@ -13,12 +13,11 @@ const MoldSpec = () => (
             <span style={{ border: '1px solid black' }}>Supplier 1</span>
             <span style={{ border: '1px solid black' }}>Supplier 2</span>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: '5px' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
             <div
                 style={{
                     width: '100%',
                     border: '1px solid black',
-                    margin: '5px',
                     display: 'flex',
                     flexWrap: 'wrap',
                 }}
@@ -75,7 +74,6 @@ const DenseTable = props => {
     const { columns, rows } = props;
     return (
         <>
-            <span>Include: column filters, select columns to show/hide, search</span>
             <TableContainer component={Paper}>
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
@@ -100,7 +98,7 @@ const DenseTable = props => {
                                 </TableRow>
                             );
                         })}
-                        <TableRow hover={true}>
+                        {/* <TableRow hover={true}>
                             <TableCell rowSpan={4}>Spanning Sport</TableCell>
                             <TableCell rowSpan={4}>Spanning Project</TableCell>
                         </TableRow>
@@ -131,7 +129,7 @@ const DenseTable = props => {
                             <TableCell>Cavity</TableCell>
                             <TableCell>Mold Model Code</TableCell>
                             <TableCell>Model Name</TableCell>
-                        </TableRow>
+                        </TableRow> */}
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -233,6 +231,93 @@ const overviewTableMockData = [
     },
 ];
 
+const rfqTableListColumns = [
+    { name: 'Supplier' },
+    { name: 'Date' },
+    { name: 'Size' },
+    { name: 'Local/Imported' },
+    { name: 'Final Price' },
+];
+
+const rfqTableListRows = [
+    {
+        supplier: <span style={{ color: 'blue' }}>Supplier</span>,
+        date: '2020-01-01',
+        size: '38-39',
+        type: 'local',
+        finalprice: '99.99',
+    },
+    {
+        supplier: <span style={{ color: 'blue' }}>...</span>,
+        date: '...',
+        size: '...',
+        type: '...',
+        finalprice: '...',
+    },
+];
+
+const cbdCols = [
+    { name: 'Items' },
+    { name: 'Description' },
+    { name: 'Qty' },
+    { name: 'Unit' },
+    { name: 'Loss' },
+    { name: 'Unit price' },
+    { name: 'Total price' },
+];
+
+const cbdRows = [
+    {
+        i: 'Raw Materials',
+        d: 'Steel304#',
+        q: '10',
+        u: 'Kilo',
+        l: '0.2',
+        p: '5',
+        t: '$52',
+    },
+    {
+        i: 'Accessories',
+        d: 'Neils',
+        q: '10',
+        u: '',
+        l: '0',
+        p: '2',
+        t: '$20',
+    },
+    {
+        i: 'Transport',
+        d: 'Shanghai',
+        q: '',
+        u: '',
+        l: '',
+        p: '50',
+        t: '$52',
+    },
+    {
+        i: 'Labor',
+        d: (
+            <span>
+                Casting
+                <br />
+                3D Scanning
+                <br />
+                NCProcess
+                <br />
+                Assembly
+                <br />
+                Texture
+                <br />
+                Coating
+            </span>
+        ),
+        q: '',
+        u: '',
+        l: '',
+        p: '',
+        t: '',
+    },
+];
 export default function CatalogMockup(props) {
     const [view, setView] = useState('none');
 
@@ -243,7 +328,7 @@ export default function CatalogMockup(props) {
                 <TreeView
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
-                    expanded={[...Array(14).keys()].map(i => i.toString())}
+                    //expanded={[...Array(14).keys()].map(i => i.toString())}
                     onNodeToggle={null}
                 >
                     <TreeItem nodeId="0" label="Country (e.g. China)" onClick={e => setView('none')}>
@@ -305,34 +390,165 @@ export default function CatalogMockup(props) {
             <div style={{ width: '75%', border: '1px solid red' }}>
                 {view === 'none' && <span>Empty View, nothing selected</span>}
                 {view === 'models_overview' && (
-                    <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
                 )}
                 {view === 'models_sport_overview' && (
-                    <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
                 )}
                 {view === 'models_projectid_overview' && (
-                    <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
                 )}
-                {view === 'rfq_overview' && <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />}
+                {view === 'rfq_overview' && (
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
+                )}
                 {view === 'rfq_sport_overview' && (
-                    <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
                 )}
                 {view === 'rfq_projectid_overview' && (
-                    <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    <>
+                        <span>Include: column filters, sort, search</span>
+                        <DenseTable columns={overviewTableColumns} rows={overviewTableMockData} />
+                    </>
                 )}
                 {view === 'mold_model_details' && (
                     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '5px' }}>
                         <span>Mold Model Details View</span>
                         <MoldSpec />
-                        <div style={{ border: '1px solid black', margin: '5px' }}>Validated Prices List</div>
+                        <div style={{ border: '1px solid black', margin: '5px' }}>
+                            <p>Validated Prices List</p>
+                            <span>Include: column filters, sort, search</span>
+                            <DenseTable columns={rfqTableListColumns} rows={rfqTableListRows} />
+                        </div>
                     </div>
                 )}
                 {view === 'rfq_details' && (
                     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '5px' }}>
                         <span>RFQ Details View</span>
                         <MoldSpec />
-                        <div style={{ border: '1px solid black', margin: '5px' }}>Requests</div>
-                        <div style={{ border: '1px solid black', margin: '5px' }}>CBD responses</div>
+                        <div style={{ border: '1px solid black', margin: '5px', display: 'flex', flexWrap: 'wrap' }}>
+                            <p style={{ width: '100%' }}>
+                                Requests List ---- <button>New Request</button>
+                            </p>
+                            <div style={{ width: '30%', fontWeight: 'bold' }}>Name</div>
+                            <div style={{ width: '30%', fontWeight: 'bold' }}>Status</div>
+                            <div style={{ width: '40%', fontWeight: 'bold' }}>Contact</div>
+                            <div style={{ width: '30%', color: 'blue' }}>12345 Supplier </div>
+                            <div
+                                style={{
+                                    width: '30%',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    color: 'blue',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: '10px',
+                                        height: '10px',
+                                        border: '2px solid blue',
+                                        borderRadius: '50%',
+                                    }}
+                                />
+                                Status: Draft
+                            </div>
+                            <div style={{ width: '40%' }}>Contact: email@example.com</div>
+                            <div style={{ width: '30%', color: 'blue' }}>67890 Supplier </div>
+                            <div
+                                style={{
+                                    width: '30%',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    color: 'green',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: '10px',
+                                        height: '10px',
+                                        border: '2px solid black',
+                                        background: 'green',
+                                        borderRadius: '50%',
+                                    }}
+                                />
+                                Status: Responded{' '}
+                            </div>
+                            <div style={{ width: '40%' }}>Contact: email@example.com</div>
+                            <div style={{ width: '30%', color: 'blue' }}>Company XXX</div>
+                            <div
+                                style={{
+                                    width: '30%',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    color: 'green',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: '10px',
+                                        height: '10px',
+                                        border: '2px solid green',
+                                        borderRadius: '50%',
+                                    }}
+                                />
+                                Status: Sent{' '}
+                            </div>
+                            <div style={{ width: '40%' }}>Contact: email@example.com</div>
+                        </div>
+                        <div
+                            style={{
+                                border: '1px solid black',
+                                margin: '5px',
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                padding: '5px',
+                            }}
+                        >
+                            <span style={{ width: '100%' }}>
+                                CBD responses (Switch to another response by code: )
+                                <p style={{ color: 'blue' }}>&lt; 10001-01 - 10001-02 - 10001-03 - 11111-01 &gt;</p>
+                            </span>
+                            <div style={{ width: '100%', border: '1px solid black' }}>
+                                *** Status Indicator: Open ------ Received ------ Responded ------ Validated ***
+                                <br />
+                                Response Code: 10001-01
+                                <br />
+                                Validation Time: DateTime()
+                                <br />
+                                Mold shop / maker: XXXXX <br />
+                                Dimensions: Height * Width * Length (unit)
+                                <br />
+                                Mold layout: XXX
+                                <br />
+                                Lifetime (qty): ... <br />
+                                Lifetime (time): ... <br />
+                                Leadtime: ... <br />
+                                Injection Machine Size: ... <br />
+                                Expected cycle time: ... <br />
+                                Contact: name@example.com
+                            </div>
+                            <br />
+                            <div style={{ width: '100%', border: '1px solid black' }}>
+                                <DenseTable columns={cbdCols} rows={cbdRows} />
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
